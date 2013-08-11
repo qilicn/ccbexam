@@ -15,7 +15,7 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 @Modules(scanPackage = true)
 @IocBy(type=ComboIocProvider.class,
         args={"*org.nutz.ioc.loader.json.JsonLoader","app.js",
-        "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","com.ccb.dl.mmisii"})
+        "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","com.ccb.dl.ccbexam"})
 
 public class MainModule {
     
