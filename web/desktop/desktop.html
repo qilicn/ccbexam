@@ -11,15 +11,15 @@
         <!-- <x-compile> -->
         <!-- <x-bootstrap> -->
         <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css">
-        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>    
+        <script type="text/javascript" src="../ext/bootstrap.js"></script>  
+        <script type="text/javascript" src="../ext/locale/ext-lang-zh_CN.js"></script>
         <script type="text/javascript" src="../shared/options-toolbar.js"></script>
         <!-- </x-bootstrap> -->
         <script type="text/javascript">
             Ext.Loader.setPath({
                 'Ext.ux.desktop': 'js',
-                MyDesktop: ''
+                'MyDesktop': ''
             });
-
             Ext.require('MyDesktop.App');
 
             var myDesktopApp;
@@ -33,5 +33,5 @@
     <body>
 
 
-</body>
+    </body>
 </html>
