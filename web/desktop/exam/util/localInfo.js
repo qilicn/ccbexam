@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-Ext.define('com.exam.controller.localInfo',{
+Ext.define('com.exam.util.localInfo',{
     //读取本地存储内容
     loadLocInfo : function(){
         var store = Ext.create('com.exam.store.localInfo',{});
