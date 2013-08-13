@@ -5,6 +5,6 @@
  */
 Ext.define('com.exam.store.localInfo',{
     extend : 'Ext.data.Store',
-    model : 'com.exam.model.localInfo',
+    model : 'com.exam.model.localInfo'
 });
 
