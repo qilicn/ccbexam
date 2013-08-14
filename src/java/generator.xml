@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="java_typemapping.java.math.BigDecimal">Long</entry>
+<entry key="jdbc_catalog">EXAMINE</entry>
+<entry key="jdbc_username">examine</entry>
+<entry key="outRoot">./out</entry>
+<entry key="java_typemapping.java.lang.Short">Integer</entry>
+<entry key="namespace">EXAMINE</entry>
+<entry key="jdbc_driver">oracle.jdbc.OracleDriver</entry>
+<entry key="java_typemapping.java.sql.Timestamp">java.util.Date</entry>
+<entry key="java_typemapping.java.sql.Clob">String</entry>
+<entry key="basepackage">net.nutz.demo2</entry>
+<entry key="jdbc_password">examine</entry>
+<entry key="jdbc_schema">EXAMINE</entry>
+<entry key="tableRemovePrefixes">t_,tb_,v_</entry>
+<entry key="java_typemapping.java.sql.Date">java.util.Date</entry>
+<entry key="java_typemapping.java.sql.Time">java.util.Date</entry>
+<entry key="jdbc_url">jdbc:oracle:thin:@localhost:1521:orcl</entry>
+<entry key="java_typemapping.java.lang.Byte">Integer</entry>
+</properties>

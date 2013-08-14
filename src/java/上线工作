@@ -1,0 +1,14 @@
+1）更新b_m_exm_user_info表，增加password字段
+update b_m_exm_user_info info
+using b_m_exm_login_info login
+on( info.user_id = login.user_id)
+when matched then
+update set info.password = login.password
+where info.user_id=login.user_id
+2)建立b_m_exm_role_func表，字段为
+CREATE TABLE "EXAMINE"."B_M_EXM_ROLE_FUNC" 
+   (	"ROLEID" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(40 BYTE), 
+	"ICONCLS" VARCHAR2(40 BYTE), 
+	"MODULE" VARCHAR2(20 BYTE)
+   )
