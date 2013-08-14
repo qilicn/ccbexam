@@ -1,5 +1,5 @@
 1）更新b_m_exm_user_info表，增加password字段
-update b_m_exm_user_info info
+merge into b_m_exm_user_info info
 using b_m_exm_login_info login
 on( info.user_id = login.user_id)
 when matched then

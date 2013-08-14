@@ -6,3 +6,7 @@
 /web/Test/
 /web/desktop/test.js
 /web/desktop/newhtml.html
+/build/
+/nbproject/
+/web/META-INF/
+/src/conf/MANIFEST.MF
