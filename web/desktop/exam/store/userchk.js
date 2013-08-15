@@ -6,7 +6,7 @@
 Ext.define('ccb.exam.store.userchk',{
     extend : 'Ext.data.Store',
     model : 'ccb.exam.model.user',
-    
+    id : 'userChk',
     proxy :{
         type : 'ajax',
         url : exam_golbal.baseUrl+'/exam/getUserInfo.nutz'

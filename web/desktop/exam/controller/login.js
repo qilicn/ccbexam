@@ -7,12 +7,16 @@ Ext.define('ccb.exam.controller.login', {
     
     views:['login'],
     stores:[
-        'userchk'
+        'userchk',
+        'userSessInfo'
     ],
     init: function() {
         this.control({
             'login button[action=login]':{
                 click : this.userLogin
+            },
+            'login button[action=close]':{
+                click : this.close
             }
         });   
     },    
@@ -28,6 +32,17 @@ Ext.define('ccb.exam.controller.login', {
             passWord : values.passWd
         };
         store.load();
+        var sessStore = this.getStore('userSessInfo');
+        sessStore.removeAll();
+        sessStore.add(store.first());
+        sessStore.sync();
+    },
+    
+    close : function(button){
+        var win = button.up('window');
+        win.close();
     }
+            
+    
 });
 

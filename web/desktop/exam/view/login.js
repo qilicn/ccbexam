@@ -39,7 +39,7 @@ Ext.define('ccb.exam.view.login',{
             {
                 text: '取消',
                 scope: this,
-                handler: this.close
+                action:'close'
             }
         ];
 

@@ -21,16 +21,16 @@ Ext.define('MyDesktop.App', {
         'MyDesktop.Notepad',
         'MyDesktop.BogusMenuModule',
         'MyDesktop.BogusModule',
-
+        'ccb.exam.app.login',
 //        'MyDesktop.Blockalanche',
         'MyDesktop.Settings'
     ],
 
     init: function() {
         // custom logic before getXYZ methods get called...
-
+        
+        var loginApp = Ext.application('ccb.exam.app.login');        
         this.callParent();
-
         // now ready...
     },
 
