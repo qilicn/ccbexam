@@ -34,7 +34,7 @@ Ext.define('ccb.exam.controller.login', {
         store.load();
         var sessStore = this.getStore('userSessInfo');
         sessStore.removeAll();
-        sessStore.add(store.first());
+        sessStore.add(store.getAt(0));
         sessStore.sync();
     },
     

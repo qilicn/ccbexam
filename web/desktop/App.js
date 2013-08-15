@@ -10,41 +10,41 @@ Ext.define('MyDesktop.App', {
 
     requires: [
         'Ext.window.MessageBox',
-
         'Ext.ux.desktop.ShortcutModel',
-
-        'MyDesktop.SystemStatus',
-        'MyDesktop.VideoWindow',
-        'MyDesktop.GridWindow',
-        'MyDesktop.TabWindow',
-        'MyDesktop.AccordionWindow',
+        'Ext.ux.desktop.Module',
         'MyDesktop.Notepad',
-        'MyDesktop.BogusMenuModule',
-        'MyDesktop.BogusModule',
-        'ccb.exam.app.login',
-//        'MyDesktop.Blockalanche',
+//        'ccb.exam.app.login',
         'MyDesktop.Settings'
     ],
-
+    logined : false,
     init: function() {
         // custom logic before getXYZ methods get called...
-        
-        var loginApp = Ext.application('ccb.exam.app.login');        
+//        if( this.logined === false ){
+//            this.logined = true;
+//            loginApp = Ext.application('ccb.exam.app.login');   
+//        }
+//        var uchkStore = Ext.create('ccb.exam.store.userSessInfo');
+//        uchkStore.load();
+//         if( uchkStore.getCount() === 0 ){
+//             Ext.Function.defer(this.init,100);
+//         }else{
+//             this.callParent();
+//         }
         this.callParent();
         // now ready...
     },
 
     getModules : function(){
         return [
-            new MyDesktop.VideoWindow(),
-            //new MyDesktop.Blockalanche(),
-            new MyDesktop.SystemStatus(),
-            new MyDesktop.GridWindow(),
-            new MyDesktop.TabWindow(),
-            new MyDesktop.AccordionWindow(),
+//            new MyDesktop.VideoWindow(),
+//            //new MyDesktop.Blockalanche(),
+//            new MyDesktop.SystemStatus(),
+//            new MyDesktop.GridWindow(),
+//            new MyDesktop.TabWindow(),
+//            new MyDesktop.AccordionWindow(),
             new MyDesktop.Notepad(),
-            new MyDesktop.BogusMenuModule(),
-            new MyDesktop.BogusModule()
+//            new MyDesktop.BogusMenuModule(),
+//            new MyDesktop.BogusModule()
         ];
     },
 
@@ -61,10 +61,10 @@ Ext.define('MyDesktop.App', {
             shortcuts: Ext.create('Ext.data.Store', {
                 model: 'Ext.ux.desktop.ShortcutModel',
                 data: [
-                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
-                    { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
-                    { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
-                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
+//                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
+//                    { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
+                      { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
+//                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
                 ]
             }),
 
