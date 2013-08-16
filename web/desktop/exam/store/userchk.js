@@ -5,7 +5,7 @@
 //用户登录认证及获取权限的store
 Ext.define('ccb.exam.store.userchk',{
     extend : 'Ext.data.Store',
-    model : 'ccb.exam.model.user',
+    model : 'ccb.exam.model.RetModel',
     id : 'userChk',
     proxy :{
         type : 'ajax',

@@ -13,23 +13,15 @@ Ext.define('MyDesktop.App', {
         'Ext.ux.desktop.ShortcutModel',
         'Ext.ux.desktop.Module',
         'MyDesktop.Notepad',
+        'ccb.exam.store.userSessInfo',
 //        'ccb.exam.app.login',
         'MyDesktop.Settings'
     ],
     logined : false,
     init: function() {
-        // custom logic before getXYZ methods get called...
-//        if( this.logined === false ){
-//            this.logined = true;
-//            loginApp = Ext.application('ccb.exam.app.login');   
-//        }
-//        var uchkStore = Ext.create('ccb.exam.store.userSessInfo');
-//        uchkStore.load();
-//         if( uchkStore.getCount() === 0 ){
-//             Ext.Function.defer(this.init,100);
-//         }else{
-//             this.callParent();
-//         }
+        var store = Ext.create('ccb.exam.store.userSessInfo',{});
+        store.load();
+        
         this.callParent();
         // now ready...
     },

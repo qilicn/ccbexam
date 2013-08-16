@@ -47,7 +47,15 @@ public class BmexmUserInfo {
 	 * 
 	 */
 	@Column("PASSWORD")
-	private String password;
+	private String passwd;
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
         
         private List<BmexmRoleFunc> shortcuts;
 
@@ -107,13 +115,6 @@ public class BmexmUserInfo {
         this.staffId = staffId;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public List<BmexmRoleFunc> getShortcuts() {
         return shortcuts;
