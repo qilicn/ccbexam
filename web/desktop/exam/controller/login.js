@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//用户登录功能
 Ext.define('ccb.exam.controller.login', {
     extend: 'Ext.app.Controller',
     views: ['login'],
@@ -9,6 +10,8 @@ Ext.define('ccb.exam.controller.login', {
         'userchk',
         'userSessInfo'
     ],
+    msg:null,
+    pu : Ext.create('ccb.exam.util.pubUtil',{}),
     init: function() {
         this.control({
             'login button[action=login]': {
@@ -22,10 +25,9 @@ Ext.define('ccb.exam.controller.login', {
     userLogin: function(button) {
         var win = button.up('window'),
                 form = win.down('form'),
-                record = form.getRecord(),
                 values = form.getValues();
 
-        var msg = Ext.MessageBox.wait('正在验证，请稍后...');
+        this.msg = Ext.MessageBox.wait('正在验证，请稍后...');
         var store = this.getStore('userchk');
         var proxy = store.getProxy();
         proxy.extraParams = {
@@ -37,7 +39,7 @@ Ext.define('ccb.exam.controller.login', {
             callback: function(records, operation, success) {
                 // the operation object
                 // contains all of the details of the load operation
-                msg.hide();
+                this.msg.hide();
                 var m = store.getAt(0);
                 var bform = form.getForm();
                 var retCode = m.get('retCode');
@@ -56,11 +58,15 @@ Ext.define('ccb.exam.controller.login', {
                 }
 
                 if (retCode === "0000") {
-                    msg.wait("登录成功，进入系统....");
+                    this.msg.wait("登录成功，进入系统....");
                     m = Ext.create('ccb.exam.model.user', m.get('retVal'));
                     var seStore = Ext.create('ccb.exam.store.userSessInfo', {});
                     seStore.add(m);
                     seStore.sync();
+                    var lm = Ext.create('ccb.exam.model.localInfo',{});
+                    lm.set('userId',m.get('userId'));
+                    lm.set('screenType',bform.findField('screenType').getValue());
+                    this.pu.saveLocInfo(lm);
                     window.location.href = exam_golbal.baseUrl + '/desktop/desktop.html';
                     return;
                 }

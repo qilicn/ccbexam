@@ -109,7 +109,13 @@ Ext.define('MyDesktop.App', {
     },
 
     onLogout: function () {
-        Ext.Msg.confirm('Logout', 'Are you sure you want to logout?');
+        Ext.Msg.confirm('确认退出系统', '您确认退出系统吗？所有未保存的记录将被清楚?',function(){
+            //清空session信息
+            var store = Ext.create('ccb.exam.store.userSessInfo',{});
+            store.removeAll();
+            //退到用户登录界面
+            window.location.href = exam_golbal.baseUrl + '/desktop/login.html';
+        });
     },
 
     onSettings: function () {

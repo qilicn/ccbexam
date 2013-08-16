@@ -1,0 +1,32 @@
+
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css">
+        <script type="text/javascript" src="GolbalVal.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../ext/ext-all-dev.js"></script>  
+        <script type="text/javascript" src="../ext/locale/ext-lang-zh_CN.js"></script>
+        <script type="text/javascript">
+            Ext.Loader.setPath({
+                enable : true,
+                'Ext.ux.desktop': 'js',
+                'MyDesktop': '',
+                //未来自己组件的入口
+                'ccb.exam':'exam'
+            });
+            Ext.require('ccb.exam.app.login');
+            Ext.onReady(function(){
+                var login = Ext.application('ccb.exam.app.login');
+            });
+        </script>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>
