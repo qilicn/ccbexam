@@ -13,7 +13,9 @@ Ext.define('ccb.exam.model.localInfo', {
         //上次登录时间
         {name:'lastLogInTime',type:'string'},
         //是否显示帮助
-        {name:'needHelp',type:'string'}
+        {name:'needHelp',type:'string'},
+        //壁纸
+        {name:'wallpage',type:'string'}
     ]
 });
 

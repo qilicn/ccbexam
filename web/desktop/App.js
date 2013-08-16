@@ -17,16 +17,46 @@ Ext.define('MyDesktop.App', {
 //        'ccb.exam.app.login',
         'MyDesktop.Settings'
     ],
-    logined : false,
+    //用户的功能列表store
+    funcStore:null,
+    //用户信息[model='ccb.exam.model.user']
+    userSessInfo : null, 
+    
+    //获取用户session信息
+    getSessStore: function(){
+        var Store = Ext.create('ccb.exam.store.userSessInfo',{});
+        Store.load();
+        if( Store.getCount() === 0){
+            this.userSessInfo = null;
+        }
+        //取出用户信息
+        this.userSessInfo = Store.getAt(0);
+        console.log(this.userSessInfo);
+        //创建功能列表的store
+        this.funcStore = Ext.create('ccb.exam.store.FuncStore');
+        var funcs = this.userSessInfo.get('shortcuts');
+        this.funcStore.insert(0,funcs);
+        this.funcStore.sync();
+        console.log(this.funcStore);
+    },
     init: function() {
-        var store = Ext.create('ccb.exam.store.userSessInfo',{});
-        store.load();
         
+        //判断用户是否通过验证
+        this.getSessStore();
+        if( this.userSessInfo === null){
+            Ext.Msg.alert('未登录用户','您未经过登录验证或已超时，请重新登陆',function(){
+                window.location.href = exam_golbal.baseUrl + '/desktop/login.html';
+            })
+        }          
         this.callParent();
         // now ready...
     },
 
     getModules : function(){
+        var Funcs = new Array();
+        this.funcStore.each(function(record){
+            console.log(recode);
+        },this);
         return [
 //            new MyDesktop.VideoWindow(),
 //            //new MyDesktop.Blockalanche(),
@@ -34,7 +64,7 @@ Ext.define('MyDesktop.App', {
 //            new MyDesktop.GridWindow(),
 //            new MyDesktop.TabWindow(),
 //            new MyDesktop.AccordionWindow(),
-            new MyDesktop.Notepad(),
+//            new MyDesktop.Notepad(),
 //            new MyDesktop.BogusMenuModule(),
 //            new MyDesktop.BogusModule()
         ];
@@ -46,21 +76,21 @@ Ext.define('MyDesktop.App', {
         return Ext.apply(ret, {
             //cls: 'ux-desktop-black',
 
-            contextMenuItems: [
-                { text: 'Change Settings', handler: me.onSettings, scope: me }
-            ],
+//            contextMenuItems: [
+//                { text: 'Change Settings', handler: me.onSettings, scope: me }
+//            ],
+              shortcuts:this.funcStore,
+//            shortcuts: Ext.create('Ext.data.Store', {
+//                model: 'Ext.ux.desktop.ShortcutModel',
+//                data: [
+////                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
+////                    { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
+//                      { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
+////                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
+//                ]
+//            }),
 
-            shortcuts: Ext.create('Ext.data.Store', {
-                model: 'Ext.ux.desktop.ShortcutModel',
-                data: [
-//                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
-//                    { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
-                      { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
-//                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
-                ]
-            }),
-
-            wallpaper: 'wallpapers/Blue-Sencha.jpg',
+            wallpaper: 'wallpapers/desktop2.jpg',
             wallpaperStretch: false
         });
     },
@@ -70,7 +100,7 @@ Ext.define('MyDesktop.App', {
         var me = this, ret = me.callParent();
 
         return Ext.apply(ret, {
-            title: 'Don Griffin',
+            title: this.userSessInfo.get('userName'),
             iconCls: 'user',
             height: 300,
             toolConfig: {
@@ -84,7 +114,7 @@ Ext.define('MyDesktop.App', {
                     },
                     '-',
                     {
-                        text:'Logout',
+                        text:'注销',
                         iconCls:'logout',
                         handler: me.onLogout,
                         scope: me
@@ -109,7 +139,8 @@ Ext.define('MyDesktop.App', {
     },
 
     onLogout: function () {
-        Ext.Msg.confirm('确认退出系统', '您确认退出系统吗？所有未保存的记录将被清楚?',function(){
+        Ext.Msg.confirm('确认退出系统', '您确认退出系统吗？所有未保存的记录将被清除!',function(){
+            Ext.Msg.wait('注销中，请稍后....');
             //清空session信息
             var store = Ext.create('ccb.exam.store.userSessInfo',{});
             store.removeAll();

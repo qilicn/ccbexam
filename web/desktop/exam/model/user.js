@@ -16,15 +16,6 @@ Ext.define('ccb.exam.model.user',{
         {name : 'userClass',type:'string'},
         {name : 'userRole',type:'string'}
     ],
-    hasMany  : {model: 'ccb.exam.model.shortcut', name: 'shortcuts'}
-});
-Ext.define('ccb.exam.model.shortcut',{
-    extend: 'Ext.data.Model',
-    fields: [
-       { name: 'name' },
-       { name: 'iconCls' },
-       { name: 'module' }
-    ],
-    belongsTo : 'ccb.exam.model.use' 
+    hasMany  : {model: 'Ext.ux.desktop.ShortcutModel',name:'shortcuts'}
 });
 

@@ -10,5 +10,6 @@ var exam_golbal = {
     wheight : 1280,
     swidth  : 1280,
     sheight : 800,
-    radio   : 0.8
+    radio   : 0.8,
+    defaultwp : 'wallpapers/desktop2.jpg'
 };

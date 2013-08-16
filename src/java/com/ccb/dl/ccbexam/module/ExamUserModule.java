@@ -67,9 +67,11 @@ public class ExamUserModule {
                 List<BmexmRoleFunc> list = dao.query(BmexmRoleFunc.class, Cnd.where("roleid", "=", uinfo.getUserRole()));
                 if (list != null) {
                     uinfo.setShortcuts(list);
+                    usb.setVal("userInfo", uinfo);
+                    rt = PubUtil.GenRetBean("0000", "用户验证成功", uinfo);
+                } else {
+                    rt = PubUtil.GenRetBean("0003", "该用户未分配功能，不能登录", "");
                 }
-                usb.setVal("userInfo", uinfo);
-                rt = PubUtil.GenRetBean("0000", "用户验证成功", uinfo);
             }
         }
         return rt;

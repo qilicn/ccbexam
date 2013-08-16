@@ -14,7 +14,6 @@ Ext.define('ccb.exam.view.login', {
     
     initComponent: function() {      
         var lmodel = this.pu.loadLocInfo();
-        console.log(lmodel);
         this.items = [
             {
                 xtype: 'form',

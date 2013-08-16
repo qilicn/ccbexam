@@ -4,6 +4,9 @@
  */
 Ext.define('ccb.exam.app.login',{
     extend: 'Ext.app.Application', 
+    requires: [
+        'Ext.container.Viewport'
+    ],    
     name: 'ccb.exam',
     appFolder: 'exam',
     controllers: [

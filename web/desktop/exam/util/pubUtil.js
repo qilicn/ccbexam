@@ -4,7 +4,7 @@
  */
 Ext.define('ccb.exam.util.pubUtil', {
     alias : ['pubUtil'],
-    require :[''],
+    require :['Ext.ux.desktop.Wallpaper'],
     loadStype: function() {
         var store = Ext.create('Ext.data.Store', {
             fields: ['type', 'code'],
@@ -33,6 +33,15 @@ Ext.define('ccb.exam.util.pubUtil', {
 //        store.sync();
         store.insert(0,[model]);
         store.sync();
+    },
+    //载入用户选择的壁纸
+    loadWallPaper:function(){
+        var model = this.loadLocInfo();
+        if( model.get('wallpage')===''){
+            Ext.create('Ext.ux.desktop.Wallpaper').setWallpaper(exam_golbal.defaultwp,false);
+        }else{
+            Ext.create('Ext.ux.desktop.Wallpaper').setWallpaper(model.get('wallpage'),false);
+        }
     }
 });
 
