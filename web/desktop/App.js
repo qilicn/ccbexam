@@ -49,14 +49,14 @@ Ext.define('MyDesktop.App', {
     init: function() {
         
         //判断用户是否通过验证
-        /*
+
         this.getSessStore();
         if( this.userSessInfo === null){
             Ext.Msg.alert('未登录用户','您未经过登录验证或已超时，请重新登陆',function(){
                 window.location.href = exam_golbal.baseUrl + '/desktop/login.html';
             })
         }         
-        */
+
         this.callParent();
         // now ready...
     },
