@@ -28,17 +28,39 @@ Ext.define('ccb.exam.base.BaseApp', {
         //命名规则为桌面图标的类，不含-shortcut
         iconCls: ''
     },
+    //定义主窗口
+    MainWIn: null,
     //定义初始化主界面的方法
     //使用appInfo.module作为唯一标识
     initMainWindow: function() {
-        return  this.getController(this.appInfo.get('module')).getView(this.appInfo.get('module'));
+        if (this.MainWIn)
+            return this.MainWIn;
+        else {
+            this.MainWIn = this.getController(this.appInfo.module).getView(this.appInfo.module);
+            return this.MainWIn;
+        }
     },
     //与desktop兼容，使用createWindow来初始化主界面
     createWindow: function() {
-        var win = this.initMainWindow();
-        return win = Ext.create(win);
+        var wincfg = this.initMainWindow();
+        var me = this;
+        console.log(wincfg);
+
+        //如果在desktop中，需要将win交由desktop处理
+        if (this.app) {
+            var desktop = this.app.getDesktop();
+            var win = desktop.getWindow(this.id);
+            if (!win) {
+                win = desktop.createWindow({appInfo: this.appInfo}, wincfg);
+                return win;
+            }
+
+        } else { //测试时单独处理            
+            return win = Ext.create(wincfg, {appInfo: this.appInfo});
+        }
     },
-    constructor: function(model,subCtrl) {
+    constructor: function(model, subCtrl) {
+debugger;
         //判断shortcut模型是否为空
         this.appInfo = model;
         this.subCtrol = subCtrl;
@@ -46,23 +68,24 @@ Ext.define('ccb.exam.base.BaseApp', {
             throw '应用信息为空，无法初始化对象!'
         }
         //创建新的模型对象，防止意外
-        this.appInfo = Ext.create('Ext.ux.desktop.ShortcutModel', this.appInfo.getData());
+//        this.appInfo = Ext.create('Ext.ux.desktop.ShortcutModel', this.appInfo.getData());
+        //创建ID
+        this.id = this.appInfo.module;
         //开始初始化信息
         //初始化主控制器
-        this.controllers.push(this.appInfo.get('module'));
+        this.controllers.push(this.appInfo.module);
         //如果有从控制器，接着初始化
-        if (this.subCtrol !== null) {            
+        if (this.subCtrol !== null) {
             Ext.Array.each(this.subCtrol, function(item) {
                 this.controllers.push(item);
             });
         }
         //初始化launcher结果，用户定义开始菜单的图标与说明
         //只有appscope为desktop的应用才需要初始化图标
-        if (this.appInfo.get('appscope') === 'desktop') {
-            this.launcher.text = this.appInf.get('name');
-            var icons = this.appInfo.get('iconCls').split('-');
-            this.launcher.iconCls = icons[0];
-        }
+        if (this.appInfo.appscope === 'desktop') {
+            this.launcher.text = this.appInfo.name;
+            this.launcher.iconCls = this.appInfo.module;
+        }        
         this.callParent();
     }
 });

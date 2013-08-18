@@ -13,10 +13,7 @@ SELECT INFO.USER_ID userId,
 /**取用户功能列表**/
 /*getRoleFuncInfo*/
 SELECT info.name name,
-       info.iconcls iconCls,
        info.module module,
-       info.comments comme,
-       info.class class,
        info.appscope
   FROM examine.b_m_exm_func_info info
  WHERE info.id IN (SELECT name

@@ -10,8 +10,8 @@ Ext.define('ccb.exam.controller.login', {
         'userchk',
         'userSessInfo'
     ],
-    msg:null,
-    pu : Ext.create('ccb.exam.util.pubUtil',{}),
+    msg: null,
+    pu: Ext.create('ccb.exam.util.pubUtil', {}),
     init: function() {
         this.control({
             'login button[action=login]': {
@@ -46,17 +46,16 @@ Ext.define('ccb.exam.controller.login', {
                 switch (retCode) {
                     case '0000' :
                         break;
-                    case '0006' :
-                        bform.setValues([
-                            {id: 'passWd', value: ''}
-                        ]);
-                    default :
+                    case '0005' :
                         bform.setValues([
                             {id: 'userId', value: ''},
                             {id: 'passWd', value: ''}
                         ]);
+                    default :
+                        bform.setValues([
+                            {id: 'passWd', value: ''}
+                        ]);
                 }
-
                 if (retCode === "0000") {
                     this.msg.wait("登录成功，进入系统....");
                     var seStore = Ext.create('ccb.exam.store.userSessInfo', {});

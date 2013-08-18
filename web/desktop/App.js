@@ -14,6 +14,7 @@ Ext.define('MyDesktop.App', {
         'Ext.ux.desktop.Module',
         'MyDesktop.Notepad',
         'ccb.exam.store.userSessInfo',
+        'ccb.exam.app.*',
 //        'ccb.exam.app.login',
         'MyDesktop.Settings'
     ],
@@ -21,6 +22,7 @@ Ext.define('MyDesktop.App', {
     funcStore:null,
     //用户信息[model='ccb.exam.model.user']
     userSessInfo : null, 
+    mds :null,
     
     //获取用户session信息
     getSessStore: function(){
@@ -37,12 +39,32 @@ Ext.define('MyDesktop.App', {
         this.userSessInfo = Ext.create('ccb.exam.model.user',retModel.get('retVal'));
         //rv : 用户的功能列表
         //后台数据库将字段全部小写，在此转换
+        //后台只传递module,name，其他在此拼写
         var rv = retModel.get('retVal').shortcuts;
         var shortcuts = new Array();
         Ext.Array.each(rv,function(item){
-            item.iconCls = item.iconcls;
+            var v = item.module;
+            item.iconCls = v+'-shortcut';
+            item.class = exam_golbal.basepkg+'.'+v;
             shortcuts.push(item);
-        })
+        });
+        
+        this.mds = new Array();
+//        Ext.Array.each(shortcuts,function(item){
+//            var model = Ext.create('Ext.ux.desktop.ShortcutModel',item);
+//            var module = Ext.create(item.class,model);
+//            this.mds.push(module);            
+//        },this);
+        for( ii = 0 ; ii < shortcuts.length ; ii ++  ){
+            var item = shortcuts[ii];
+            debugger;
+            var appCLass = Ext.ClassManager.get(item.class);
+            console.log(appCLass);
+            var module =  new appCLass(item);
+            this.mds[ii]=module;
+            console.log(this.mds);
+        }
+        
         //创建功能列表的store
         this.funcStore = Ext.create('ccb.exam.store.FuncStore',{data:shortcuts});     
     },
@@ -62,47 +84,15 @@ Ext.define('MyDesktop.App', {
     },
 
     getModules : function(){
-        //利用功能列表进行填充
-        var Modules = new Array();
-        this.funcStore.each(function(item){
-            var module = Ext.create(item.get('class'));
-            //修改lancher的标签
-            module.launcher.text=item.get('name');
-            Modules.push(module);
-        },this);
-        return Modules;
-//        return [
-////            new MyDesktop.VideoWindow(),
-////            //new MyDesktop.Blockalanche(),
-////            new MyDesktop.SystemStatus(),
-////            new MyDesktop.GridWindow(),
-////            new MyDesktop.TabWindow(),
-////            new MyDesktop.AccordionWindow(),
-//           new MyDesktop.Notepad(),
-////            new MyDesktop.BogusMenuModule(),
-////            new MyDesktop.BogusModule()
-//        ];
+        return this.mds;
     },
 
     getDesktopConfig: function () {
         var me = this, ret = me.callParent();
 
         return Ext.apply(ret, {
-            //cls: 'ux-desktop-black',
-
-//            contextMenuItems: [
-//                { text: 'Change Settings', handler: me.onSettings, scope: me }
-//            ],
               shortcuts:this.funcStore,
-//            shortcuts: Ext.create('Ext.data.Store', {
-//                model: 'Ext.ux.desktop.ShortcutModel',
-//                data: [
-////                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
-////                    { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
-//                      { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
-////                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
-//                ]
-//            }),
+
 
             wallpaper: 'wallpapers/desktop2.jpg',
             wallpaperStretch: false

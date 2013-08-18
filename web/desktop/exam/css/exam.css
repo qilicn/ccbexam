@@ -1,0 +1,45 @@
+/* 
+    Document   : exam
+    Created on : 2013-8-18, 14:04:30
+    Author     : yx
+    Description:
+        Purpose of the stylesheet follows.
+*/
+/**
+每个图标应生成4个类
+module_shortcut : 桌面图标类
+module : 开始菜单图标类
+对于ie6，重新定义上述两个类
+**/
+
+
+.changepass-shortcut{
+    background-image:url(../images/changepass48.png)
+}
+.changepass{
+    background-image:url(../images/changepass24.png);  
+}
+.x-ie6 .changepass-shortcut{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/changepass48.png', sizingMethod='scale');    
+}
+.x-ie6 .changepass{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/changepass24.png', sizingMethod='scale'); 
+}
+
+.testapp-shortcut{
+    background-image:url(../images/test48.png)
+}
+.testapp{
+    background-image:url(../images/test24.png);  
+}
+.x-ie6 .testapp-shortcut{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale');    
+}
+.x-ie6 .testapp{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
+ 
+}
