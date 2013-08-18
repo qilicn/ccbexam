@@ -10,11 +10,11 @@
 Ext.define('ccb.exam.model.user',{
     extend: 'Ext.data.Model',
     fields: [
-        {name : 'userId',type :'string'},
+        {name : 'userid',type :'string'},
         {name : 'passwd',type :'string'},
-        {name : 'userName',type:'string'},
-        {name : 'userClass',type:'string'},
-        {name : 'userRole',type:'string'}
+        {name : 'username',type:'string'},
+        {name : 'orgno',type:'string'},
+        {name : 'userrole',type:'string'}
     ],
     hasMany  : {model: 'Ext.ux.desktop.ShortcutModel',name:'shortcuts'}
 });

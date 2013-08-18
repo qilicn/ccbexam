@@ -28,10 +28,11 @@ Ext.define('ccb.exam.util.pubUtil', {
     //保存本地存储内容
     saveLocInfo: function(model) {
         var store = Ext.create('ccb.exam.store.localInfo', {});
-//        store.load();
-//        store.removeAll();
-//        store.sync();
-        store.insert(0,[model]);
+        store.load();
+        store.removeAll();
+        store.sync();
+        store.load();
+        store.add(model);
         store.sync();
     },
     //载入用户选择的壁纸

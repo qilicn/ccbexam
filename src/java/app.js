@@ -38,6 +38,5 @@ var ioc={
         type:'org.nutz.dao.impl.FileSqlManager',
         args:['H2.sql']
     }
-
 };
 

@@ -12,3 +12,4 @@ CREATE TABLE "EXAMINE"."B_M_EXM_ROLE_FUNC"
 	"ICONCLS" VARCHAR2(40 BYTE), 
 	"MODULE" VARCHAR2(20 BYTE)
    )
+3)第一条不做了，还是不能习惯用class.......,我对ORM映射真是有天生的反感啊

@@ -13,8 +13,20 @@
 Ext.define('Ext.ux.desktop.ShortcutModel', {
     extend: 'Ext.data.Model',
     fields: [
-       { name: 'name' },
-       { name: 'iconCls' },
-       { name: 'module' }
-    ]
+        //中文名
+        {name: 'name'},
+        //桌面图标的css Class
+        {name: 'iconCls'},
+        //应用标识
+        {name: 'module'},
+        //注释
+        {name: 'comme'},
+        //类名
+        {name: 'class'},
+        //应用范围
+        //用于判断是否需要在桌面初始化图标
+        //如果为desktop需要，其他不需要
+        {name: 'appscope'}
+    ],
+    beLongsTo: 'ccb.exam.model.user'
 });

@@ -4,7 +4,7 @@
  */
 Ext.define('ccb.exam.store.userSessInfo',{
     extend : 'Ext.data.Store',
-    model : 'ccb.exam.model.user',
+    model : 'ccb.exam.model.RetModel',
     id : 'userSessInfo',
     proxy :{ 
         type : 'sessionstorage',

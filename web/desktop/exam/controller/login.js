@@ -59,21 +59,16 @@ Ext.define('ccb.exam.controller.login', {
 
                 if (retCode === "0000") {
                     this.msg.wait("登录成功，进入系统....");
-                    var retVal = m.get('retVal').shortcuts;
-                    console.log(retVal);
-                    m = Ext.create('ccb.exam.model.user', m.get('retVal'));
-                    var funcs = new Array();
-                    Ext.Array.each(retVal,function(item){
-                        var shortcut = Ext.create('Ext.ux.desktop.ShortcutModel',item);
-                        shortcut.set('iconCls',item.iconcls);
-                        funcs.push(shortcut);
-                    })
-                    m.set('shortcuts',funcs);
                     var seStore = Ext.create('ccb.exam.store.userSessInfo', {});
-                    seStore.add(m);
+                    var um = Ext.create('ccb.exam.model.RetModel',m.getData());
+                    seStore.load();
+                    seStore.removeAll();
+                    seStore.sync();
+                    seStore.add(um);
                     seStore.sync();
                     var lm = Ext.create('ccb.exam.model.localInfo',{});
-                    lm.set('userId',m.get('userId'));
+                    var userModel = Ext.create('ccb.exam.model.user',m.get('retVal'));
+                    lm.set('userId',userModel.get('userid'));
                     lm.set('screenType',bform.findField('screenType').getValue());
                     this.pu.saveLocInfo(lm);
                     window.location.href = exam_golbal.baseUrl + '/desktop/desktop.html';

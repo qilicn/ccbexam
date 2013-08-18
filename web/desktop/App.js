@@ -65,7 +65,9 @@ Ext.define('MyDesktop.App', {
         //利用功能列表进行填充
         var Modules = new Array();
         this.funcStore.each(function(item){
-            var module = Ext.create(item.get('module'));
+            var module = Ext.create(item.get('class'));
+            //修改lancher的标签
+            module.launcher.text=item.get('name');
             Modules.push(module);
         },this);
         return Modules;
@@ -140,10 +142,10 @@ Ext.define('MyDesktop.App', {
         var ret = this.callParent();
 
         return Ext.apply(ret, {
-            quickStart: [
-                { name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
-                { name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
-            ],
+//            quickStart: [
+//                { name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
+//                { name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
+//            ],
             trayItems: [
                 { xtype: 'trayclock', flex: 1 }
             ]
