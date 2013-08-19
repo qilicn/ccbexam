@@ -7,29 +7,32 @@
 //初始化的时候需要传入两个自定义参数:appInfo及fitScreen(可选);
 Ext.define('ccb.exam.base.BaseView', {
     extend: 'Ext.window.Window',
-    autoShow: true,
-    hideMode: 'offsets',
-    layout: 'fit',
     //定义是否支持宽窄屏切换
     //默认支持
-    fitScreen: true,
-    //默认载入读取宽窄屏的类
-    pu: null, //Ext.create('ccb.exam.util.pubUtil',{}),
+//    fitScreen: true,
+//    //默认载入读取宽窄屏的类
+//    pu: null, //Ext.create('ccb.exam.util.pubUtil',{}),
     //载入应用类
-    appInfo: null,
-    border: false,
-    animCollapse: false,
+//    appInfo: null,
+//    border: false,
+//    animCollapse: false,
     //初始化方法
     constructor: function(cfg) {
 
-        console.log('base constructor');
         var me = this;
         Ext.apply(me, cfg);
         if (me.appInfo === null) {
             throw 'function info not init....';
             return;
         }
+        
+        
 
+        me.autoShow = true;
+        me.hideMode = 'offsets';
+        me.layout = 'fit';
+        me.border=  false;
+        me.animCollapse =false;
         //如果需要处理宽窄屏切换，
         //在此计算创建窗口的高与宽
         if (me.fitScreen) {
@@ -65,7 +68,10 @@ Ext.define('ccb.exam.base.BaseView', {
 
     },
     initComponent: function() {
-        console.log('init base view');
+        this.callParent(arguments);
+    },
+    destroy: function(arguments) {
+        console.log('destroy ...');
         this.callParent(arguments);
     }
 });

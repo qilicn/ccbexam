@@ -4,12 +4,11 @@
  */
 //用户重置密码的视图
 Ext.define('ccb.exam.view.changepass', {
-    extend: 'Ext.window.Window',
+    extend: 'ccb.exam.base.BaseView',
     alias: 'widget.changepass',
-    modal: true,
-    title: '重置密码',
+  //  modal: true,
+    fitScreen : false,
     layout: 'fit',
-    autoShow: true,
     initComponent: function() {
         this.items = [{
                 xtype: 'form',

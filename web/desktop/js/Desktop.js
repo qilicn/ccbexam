@@ -191,6 +191,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
     },
 
     onShortcutItemClick: function (dataView, record) {
+
         var me = this, module = me.app.getModule(record.data.module),
             win = module && module.createWindow();
 
@@ -295,7 +296,8 @@ Ext.define('Ext.ux.desktop.Desktop', {
                 isWindow: true,
                 constrainHeader: true,
                 minimizable: true,
-                maximizable: true
+                maximizable: true,
+                closeAction:"hide" 
             });
 
         cls = cls || Ext.window.Window;
@@ -311,7 +313,8 @@ Ext.define('Ext.ux.desktop.Desktop', {
             beforeshow: me.updateActiveWindow,
             deactivate: me.updateActiveWindow,
             minimize: me.minimizeWindow,
-            destroy: me.onWindowClose,
+//            destroy: me.onWindowClose,
+            beforeclose:me.onWindowClose,
             scope: me
         });
 

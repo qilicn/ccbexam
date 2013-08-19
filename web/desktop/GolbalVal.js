@@ -6,10 +6,10 @@
 //应用基地址
 var exam_golbal = {
     baseUrl : 'http://localhost:8084/ccbexam',
-    wwidth  : 1024,
-    wheight : 500,
-    swidth  : 800,
-    sheight : 500,
+    wwidth  : 1200,
+    wheight : 900,
+    swidth  : 960,
+    sheight : 720,
     radio   : 1,
     basepkg : 'ccb.exam.app',
     defaultwp : 'wallpapers/desktop2.jpg'

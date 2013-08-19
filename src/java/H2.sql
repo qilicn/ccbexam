@@ -16,6 +16,6 @@ SELECT info.name name,
        info.module module,
        info.appscope
   FROM examine.b_m_exm_func_info info
- WHERE info.id IN (SELECT name
+ WHERE info.module IN (SELECT name
                        FROM b_m_exm_role_func func
                       WHERE func.roleId = '%s')

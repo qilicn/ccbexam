@@ -43,3 +43,18 @@ module : 开始菜单图标类
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
  
 }
+.testapp_1-shortcut{
+    background-image:url(../images/test48.png)
+}
+.testapp_1{
+    background-image:url(../images/test24.png);  
+}
+.x-ie6 .testapp_1-shortcut{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale');    
+}
+.x-ie6 .testapp_1{
+    background-image: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
+ 
+}
