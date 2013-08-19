@@ -9,8 +9,8 @@ and open the template in the editor.
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css">
-        <script type="text/javascript" src="GolbalVal.js"></script>
-        <script charset="utf-8" type="text/javascript" src="../ext/ext-all-dev.js"></script>  
+        <link rel="stylesheet" type="text/css" href="css/desktop.css">
+        <script charset="utf-8" type="text/javascript" src="../ext/bootstrap.js"></script>  
         <script type="text/javascript" src="../ext/locale/ext-lang-zh_CN.js"></script>
         <script type="text/javascript">
             Ext.Loader.setPath({
@@ -18,9 +18,11 @@ and open the template in the editor.
                 'Ext.ux.desktop': 'js',
                 'MyDesktop': '',
                 //未来自己组件的入口
-                'ccb.exam':'exam'
+                'ccb.exam':'exam',
+                'comm':'comm'
             });
             Ext.require('ccb.exam.app.login');
+            Ext.require('comm.pubUtil');
             Ext.onReady(function(){
                 var login = Ext.application('ccb.exam.app.login');
             });

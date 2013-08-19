@@ -10,8 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css">
         <link rel="stylesheet" type="text/css" href="css/desktop.css" />
         <link rel="stylesheet" type="text/css" href="exam/css/exam.css"/>        
-        <script type="text/javascript" src="GolbalVal.js"></script>
-        <script charset="utf-8" type="text/javascript" src="../ext/ext-all-dev.js"></script>  
+        <script charset="utf-8" type="text/javascript" src="../ext/bootstrap.js"></script>  
         <script type="text/javascript" src="../ext/locale/ext-lang-zh_CN.js"></script>
         <!-- </x-bootstrap> -->
         <script type="text/javascript">
@@ -20,10 +19,11 @@
                 'Ext.ux.desktop': 'js',
                 'MyDesktop': '',
                 //未来自己组件的入口
-                'ccb.exam':'exam'
+                'ccb.exam':'exam',
+                'comm':'comm'
             });
             Ext.require('MyDesktop.App');
-
+            Ext.require('comm.*');
             var myDesktopApp;
             Ext.onReady(function() {
                 myDesktopApp = new MyDesktop.App();

@@ -12,10 +12,18 @@ Ext.define('ccb.exam.app.login',{
     controllers: [
         'login'
     ],   
+    id : 'login',
     launch: function() {
-        var win = this.getController('login').getView('login');
-        win = Ext.create(win);
-        win.show();
+        Ext.create('Ext.container.Viewport', {
+            border: false,
+            layout: 'fit',
+            items : {
+                xtype : 'login'
+            }
+        });
+//        var win = this.getController('login').getView('login');
+//        win = Ext.create(win);
+//        win.show();
     }
     
 });

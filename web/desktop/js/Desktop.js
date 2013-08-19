@@ -81,7 +81,6 @@ Ext.define('Ext.ux.desktop.Desktop', {
 
     initComponent: function () {
         var me = this;
-
         me.windowMenu = new Ext.menu.Menu(me.createWindowMenu());
 
         me.bbar = me.taskbar = new Ext.ux.desktop.TaskBar(me.taskbarConfig);

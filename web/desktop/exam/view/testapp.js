@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 Ext.define('ccb.exam.view.testapp', {
-    extend: 'ccb.exam.base.BaseView',
+    extend: 'Ext.window.Window',
     alias: 'widget.testapp',
+    width: 1024,
+    height: 768,
+    layout: 'fit',
     initComponent: function() {
         this.items = [
             {

@@ -15,7 +15,8 @@ Ext.define('MyDesktop.App', {
         'ccb.exam.store.userSessInfo',
         'ccb.exam.app.*',
 //        'ccb.exam.app.login',
-        'MyDesktop.Settings'
+        'MyDesktop.Settings',
+        'comm.pubUtil'
     ],
     //用户的功能列表store
     funcStore: null,
@@ -43,7 +44,7 @@ Ext.define('MyDesktop.App', {
         Ext.Array.each(rv, function(item) {
             var v = item.module;
             item.iconCls = v + '-shortcut';
-            item.class = exam_golbal.basepkg + '.' + v;
+//            item.class = comm.pubUtil.basepkg + '.' + v;
             shortcuts.push(item);
         });
 
@@ -55,7 +56,7 @@ Ext.define('MyDesktop.App', {
 //        },this);
         for (ii = 0; ii < shortcuts.length; ii++) {
             var item = shortcuts[ii];
-            var module = Ext.create(item.class, item);
+            var module = Ext.create(comm.pubUtil.basepkg+'.'+item.module, item);
             this.mds[ii] = module;
             console.log(this.mds);
         }
@@ -70,7 +71,7 @@ Ext.define('MyDesktop.App', {
         this.getSessStore();
         if (this.userSessInfo === null) {
             Ext.Msg.alert('未登录用户', '您未经过登录验证或已超时，请重新登陆', function() {
-                window.location.href = exam_golbal.baseUrl + '/desktop/login.html';
+                window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
             })
         }
 
@@ -138,7 +139,7 @@ Ext.define('MyDesktop.App', {
                 var store = Ext.create('ccb.exam.store.userSessInfo', {});
                 store.removeAll();
                 //退到用户登录界面
-                window.location.href = exam_golbal.baseUrl + '/desktop/login.html';
+                window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
             } else {
 
             }

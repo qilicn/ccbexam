@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 Ext.define('ccb.exam.app.changepass',{
-    extend: 'ccb.exam.base.BaseApp'  
+    extend: 'ccb.exam.base.BaseApp',
+    fitScreen:false
 });
 

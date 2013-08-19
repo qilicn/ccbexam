@@ -11,7 +11,7 @@ Ext.define('ccb.exam.controller.login', {
         'userSessInfo'
     ],
     msg: null,
-    pu: Ext.create('ccb.exam.util.pubUtil', {}),
+   // pu: Ext.create('ccb.exam.util.pubUtil', {}),
     init: function() {
         this.control({
             'login button[action=login]': {
@@ -69,8 +69,8 @@ Ext.define('ccb.exam.controller.login', {
                     var userModel = Ext.create('ccb.exam.model.user',m.get('retVal'));
                     lm.set('userId',userModel.get('userid'));
                     lm.set('screenType',bform.findField('screenType').getValue());
-                    this.pu.saveLocInfo(lm);
-                    window.location.href = exam_golbal.baseUrl + '/desktop/desktop.html';
+                    comm.pubUtil.saveLocInfo(lm);
+                    window.location.href = comm.pubUtil.baseUrl + '/desktop/desktop.html';
                     return;
                 }
 

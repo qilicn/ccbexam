@@ -69,10 +69,6 @@ Ext.define('ccb.exam.base.BaseView', {
     },
     initComponent: function() {
         this.callParent(arguments);
-    },
-    destroy: function(arguments) {
-        console.log('destroy ...');
-        this.callParent(arguments);
     }
 });
 

@@ -18,7 +18,7 @@ Ext.define('ccb.exam.controller.changepass', {
         });
     },
     change: function(button) {
-
+        console.log('buuton click');
     },
     close: function(button) {
 
