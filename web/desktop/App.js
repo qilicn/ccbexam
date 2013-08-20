@@ -136,6 +136,10 @@ Ext.define('MyDesktop.App', {
                 //清空session信息
                 var store = Ext.create('ccb.exam.store.userSessInfo', {});
                 store.removeAll();
+                store.sync();
+                store = Ext.create('ccb.exam.store.commlog',{});
+                store.removeAll();
+                store.sync();
                 //退到用户登录界面
                 window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
             } else {

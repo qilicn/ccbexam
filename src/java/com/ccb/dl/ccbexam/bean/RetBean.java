@@ -12,9 +12,29 @@ public class RetBean {
     private String retCode;
     private String retMsg;
     private Object retVal;
+    private boolean success;
+    private String errMsg; 
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+    
+    
 
     public String getRetCode() {
         return retCode;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public void setRetCode(String retCode) {

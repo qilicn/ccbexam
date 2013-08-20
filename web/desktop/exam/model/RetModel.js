@@ -8,7 +8,9 @@ Ext.define('ccb.exam.model.RetModel',{
     fields: [
         {name:'retCode',type:'string'},
         {name:'retMsg',type:'string'},
-        {name:'retVal',type:'object'}
+        {name:'retVal',type:'object'},
+        {name:'success',type:'boolean'},
+        {name:'errMsg',type:'string'}
     ]
 })
 

@@ -6,41 +6,54 @@
 Ext.define('ccb.exam.view.changepass', {
     extend: 'Ext.window.Window',
     alias: 'widget.changepass',
-  //  modal: true,
-    fitScreen : false,
+    require: [
+        'comm.MyVtype'
+    ],
+    //  modal: true,
+    fitScreen: false,
     layout: 'fit',
     initComponent: function() {
         Ext.QuickTips.init();
+        console.log(comm.MyVtype.fieldEq());
+        Ext.apply(Ext.form.VTypes, comm.MyVtype.chkPwd());
         this.items = [{
                 xtype: 'form',
                 id: 'changepassform',
-                defaults :{
-                    msgTarget : 'under',
+                defaults: {
+                    msgTarget: 'under',
                     allowBlank: false,
-                    blanText : '请输入'
+                    blanText: '请输入',
+                    inputType: 'password'
                 },
-                
                 items: [
                     {
                         xtype: 'textfield',
                         name: 'opassWd',
+                        id: 'opassWd',
                         fieldLabel: '旧密码',
-                        inputType: 'password',
+                        chkPwd: {of: 'opassWd', ff: 'passWd1', sf: 'passWd2'},
+                        vtype: 'chkPwd',
                         minLength: 6
                     },
                     {
                         xtype: 'textfield',
                         name: 'passWd1',
+                        id: 'passWd1',
                         fieldLabel: '新密码',
-                        inputType: 'password',
+                        chkPwd: {of: 'opassWd', ff: 'passWd1', sf: 'passWd2'},
+                        vtype: 'chkPwd',
                         minLength: 6
                     },
                     {
                         xtype: 'textfield',
                         name: 'passWd2',
+                        id: 'passWd2',
                         fieldLabel: '再输入新密码',
-                        inputType: 'password',
+                        chkPwd: {of: 'opassWd', ff: 'passWd1', sf: 'passWd2'},
+                        vtype: 'chkPwd',
                         minLength: 6
+                    }, {
+                        xtype: 'displayfield'
                     }
                 ]
             }];
@@ -50,7 +63,7 @@ Ext.define('ccb.exam.view.changepass', {
                 action: 'change'
             },
             {
-                text: '取消',
+                text: '清除',
                 scope: this,
                 action: 'close'
             }

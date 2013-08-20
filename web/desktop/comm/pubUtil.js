@@ -79,6 +79,57 @@ Ext.define('comm.pubUtil', {
 
             return obj;
         },
+        //用户session异常后返回
+        sessTimeOut: function(Msg,Msg2) {
+            var txt1,txt2 ;
+            if( Msg ){
+                txt1 = Msg;
+                txt2 = Msg2;
+            }else{
+                txt1 = '未登录用户'; txt2 =  '您未经过登录验证或已超时，请重新登陆';
+            }    
+            Ext.Msg.alert(txt1, txt2, function() {
+                var store = Ext.create('ccb.exam.store.userSessInfo', {});
+                store.removeAll();
+                store.sync();
+                store = Ext.create('ccb.exam.store.commlog',{});
+                store.removeAll();
+                store.sync();                
+                window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
+            })
+        },
+        //获取用户sess
+        getUserInfo: function() {
+            var Store = Ext.create('ccb.exam.store.userSessInfo', {});
+            Store.load();
+
+            //如果为零，意味着获取失败
+            //需要重新登陆
+            if (Store.getCount() === 0) {
+                comm.pubUtil.sessTimeOut();
+                return;
+            }
+            //返回用户登录时带来的retVal
+            return Store.getAt(0).data.retVal;
+        },
+        //记录用户通讯失败日志
+        storeErrLog: function(Msg) {
+            var Store = Ext.create('ccb.exam.store.commlog', {});
+            Store.load();
+            var model = Ext.create('ccb.exam.model.RetModel', Msg);
+            Store.add(model);
+            Store.sync();
+        },
+        getErrLog: function(Msg) {
+            var Store = Ext.create('ccb.exam.store.commlog', {});
+            Store.load();
+            var vt = new Array();
+            Store.each(function(item){
+                vt.push(item);
+            },this)
+            return vt;
+        },
+        
         baseUrl: 'http://localhost:8084/ccbexam',
         wwidth: 800,
         wheight: 600,

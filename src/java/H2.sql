@@ -19,3 +19,8 @@ SELECT info.name name,
  WHERE info.module IN (SELECT name
                        FROM b_m_exm_role_func func
                       WHERE func.roleId = '%s')
+/**更改用户密码**/
+/*changeUserPassword*/
+UPDATE b_m_exm_login_info login
+   SET LOGIN.PASSWORD = '%s'
+ WHERE LOGIN.USER_ID = '%s'
