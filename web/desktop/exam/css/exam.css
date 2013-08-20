@@ -58,3 +58,13 @@ module : 开始菜单图标类
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
  
 }
+.loginMsgNormal{
+    text-align: center;
+    font-weight: normal;
+    color: black;
+}
+.loginMsgError{
+    text-align: center;
+    font-weight: bold;
+    color: red;
+}

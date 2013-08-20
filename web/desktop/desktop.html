@@ -23,7 +23,11 @@
                 'comm':'comm'
             });
             Ext.require('MyDesktop.App');
-            Ext.require('comm.*');
+            Ext.require('comm.pubUtil');
+            Ext.require('ccb.exam.model.user');
+            Ext.require('ccb.exam.app.testapp');
+            Ext.require('ccb.exam.controller.testapp');
+            
             var myDesktopApp;
             Ext.onReady(function() {
                 myDesktopApp = new MyDesktop.App();

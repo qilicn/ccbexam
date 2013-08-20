@@ -18,7 +18,13 @@ Ext.define('ccb.exam.controller.changepass', {
         });
     },
     change: function(button) {
-        console.log('buuton click');
+        var win = button.up('window');
+        var form = win.down('form');
+        var bform = form.getForm();
+        if( bform.hasInvalidField() === false ){
+            Ext.MessageBox.alert('有非法的输入项，请检查后提交');
+            return;
+        }
     },
     close: function(button) {
 

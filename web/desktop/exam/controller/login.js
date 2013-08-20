@@ -74,7 +74,10 @@ Ext.define('ccb.exam.controller.login', {
                     return;
                 }
 
-                Ext.MessageBox.alert(m.get('retMsg'));
+                //Ext.MessageBox.alert(m.get('retMsg'));
+                bform.setValues([
+                    {id:'errorMsg',value:m.get('retMsg')}
+                ]);
             }
         });
 

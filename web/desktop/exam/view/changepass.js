@@ -10,9 +10,16 @@ Ext.define('ccb.exam.view.changepass', {
     fitScreen : false,
     layout: 'fit',
     initComponent: function() {
+        Ext.QuickTips.init();
         this.items = [{
                 xtype: 'form',
                 id: 'changepassform',
+                defaults :{
+                    msgTarget : 'under',
+                    allowBlank: false,
+                    blanText : '请输入'
+                },
+                
                 items: [
                     {
                         xtype: 'textfield',
@@ -35,7 +42,6 @@ Ext.define('ccb.exam.view.changepass', {
                         inputType: 'password',
                         minLength: 6
                     }
-
                 ]
             }];
         this.buttons = [

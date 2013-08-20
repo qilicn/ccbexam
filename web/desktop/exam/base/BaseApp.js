@@ -33,6 +33,11 @@ Ext.define('ccb.exam.base.BaseApp', {
     //定义初始化主界面的方法
     //使用appInfo.module作为唯一标识
 //    定义getController的方法(搞了24个小时，估计一个应用里面的application不能是多个)
+//    getController : function( name ){
+//        var className = this.name +'.controller.'+name;
+//        var c = Ext.create(className);
+//        return c;
+//    },
     initMainWindow: function() {
 //        if (this.MainWIn)
 //            return this.MainWIn;
@@ -46,9 +51,8 @@ Ext.define('ccb.exam.base.BaseApp', {
     //与desktop兼容，使用createWindow来初始化主界面
     createWindow: function() {
         var wincfg = this.initMainWindow();
-        var me = this;
-        console.log(wincfg);
-
+        var me = this;                
+        
         //如果在desktop中，需要将win交由desktop处理
         if (this.app) {
             var desktop = this.app.getDesktop();
@@ -61,7 +65,6 @@ Ext.define('ccb.exam.base.BaseApp', {
                 Ext.apply(cfg,{
                     appInfo : this.appInfo
                 });
-                console.log(cfg);
                 win = desktop.createWindow(cfg, wincfg);
                 return win;
             } else {
@@ -105,6 +108,7 @@ Ext.define('ccb.exam.base.BaseApp', {
             this.launcher.iconCls = this.appInfo.module;
         }
         this.callParent();
+        //this.callParent(arguments);
     }
 });
 

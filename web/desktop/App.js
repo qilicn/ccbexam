@@ -58,7 +58,6 @@ Ext.define('MyDesktop.App', {
             var item = shortcuts[ii];
             var module = Ext.create(comm.pubUtil.basepkg+'.'+item.module, item);
             this.mds[ii] = module;
-            console.log(this.mds);
         }
 
         //创建功能列表的store
@@ -74,9 +73,8 @@ Ext.define('MyDesktop.App', {
                 window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
             })
         }
-
         this.callParent();
-        // now ready...
+        // now ready...        
     },
     getModules: function() {
         return this.mds;

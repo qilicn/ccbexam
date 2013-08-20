@@ -12,9 +12,10 @@ Ext.define('ccb.exam.view.login', {
     ],
     alias: 'widget.login',
     closable: false,
-    modal: true,
+    draggable : false,
+    //modal: true,
     title: '用户登录',
-    layout: 'fit',
+  //  layout: 'fit',
     autoShow: true,
     id: 'login',
     initComponent: function() {
@@ -45,10 +46,17 @@ Ext.define('ccb.exam.view.login', {
                         displayField: 'type',
                         valueField: 'code',
                         value: lmodel.get('screenType')
+                    },
+                    {
+                        xtype : 'displayfield',
+                        id : 'errorMsg',
+                        name : 'errorMsg',   
+                        fieldStyle:'color:read',
+                        value:'请输入用户信息'
                     }
                 ]
-            },
-            {xtype: 'wallpaper', id: this.id + '_wallpaper'},
+            }
+//            {xtype: 'wallpaper', id: this.id + '_wallpaper'},
         ];
 
         this.buttons = [
@@ -64,8 +72,8 @@ Ext.define('ccb.exam.view.login', {
         ];
 
         this.callParent(arguments);
-        this.wallpaper = this.items.getAt(1);
-        this.wallpaper.setWallpaper(comm.pubUtil.defaultwp,false);
+//        this.wallpaper = this.items.getAt(1);
+//        this.wallpaper.setWallpaper(comm.pubUtil.defaultwp,false);
     }
 });
 
