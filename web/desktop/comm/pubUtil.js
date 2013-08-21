@@ -80,21 +80,22 @@ Ext.define('comm.pubUtil', {
             return obj;
         },
         //用户session异常后返回
-        sessTimeOut: function(Msg,Msg2) {
-            var txt1,txt2 ;
-            if( Msg ){
+        sessTimeOut: function(Msg, Msg2) {
+            var txt1, txt2;
+            if (Msg) {
                 txt1 = Msg;
                 txt2 = Msg2;
-            }else{
-                txt1 = '未登录用户'; txt2 =  '您未经过登录验证或已超时，请重新登陆';
-            }    
+            } else {
+                txt1 = '未登录用户';
+                txt2 = '您未经过登录验证或已超时，请重新登陆';
+            }
             Ext.Msg.alert(txt1, txt2, function() {
                 var store = Ext.create('ccb.exam.store.userSessInfo', {});
                 store.removeAll();
                 store.sync();
-                store = Ext.create('ccb.exam.store.commlog',{});
+                store = Ext.create('ccb.exam.store.commlog', {});
                 store.removeAll();
-                store.sync();                
+                store.sync();
                 window.location.href = comm.pubUtil.baseUrl + '/desktop/login.html';
             })
         },
@@ -124,12 +125,17 @@ Ext.define('comm.pubUtil', {
             var Store = Ext.create('ccb.exam.store.commlog', {});
             Store.load();
             var vt = new Array();
-            Store.each(function(item){
+            Store.each(function(item) {
                 vt.push(item);
-            },this)
+            }, this)
             return vt;
         },
-        
+        getBform: function(button) {
+            var win = button.up('window');
+            var form = win.down('form');
+            var bform = form.getForm();
+            return bform;
+        },
         baseUrl: 'http://localhost:8084/ccbexam',
         wwidth: 800,
         wheight: 600,

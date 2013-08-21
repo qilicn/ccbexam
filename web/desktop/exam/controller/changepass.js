@@ -5,7 +5,7 @@
 //用户更换密码功能
 Ext.define('ccb.exam.controller.changepass', {
     extend: 'Ext.app.Controller',
-    views: ['changepass', 'testapp_2'],
+    views: ['changepass'],
     msg: null,
     init: function() {
         this.control({
@@ -21,12 +21,6 @@ Ext.define('ccb.exam.controller.changepass', {
         });
     },
     //获取指定form的basic类
-    getBform: function(button) {
-        var win = button.up('window');
-        var form = win.down('form');
-        var bform = form.getForm();
-        return bform;
-    },
     change: function(button) {
         var bform = this.getBform(button);
         if (bform.hasInvalidField() === true) {

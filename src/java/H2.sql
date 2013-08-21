@@ -24,3 +24,37 @@ SELECT info.name name,
 UPDATE b_m_exm_login_info login
    SET LOGIN.PASSWORD = '%s'
  WHERE LOGIN.USER_ID = '%s'
+/**查找一个领导人的工作日志**/
+/*getUserReport*/
+SELECT *
+    FROM (SELECT rptdate rdate,
+                 rpttype rtype,
+                 rptconx rept,
+                 CASE FLOW.RPTSTATUS
+                    WHEN '0' THEN '未审批'
+                    WHEN '1' THEN '审批通过'
+                    WHEN '2' THEN '拒绝'
+                 END
+                    rstatus,
+                 FLOW.RPTSTATUS stscode
+            FROM B_M_EXM_RPT_FLOW flow
+           WHERE user_id = '%s'
+          UNION ALL
+          SELECT TO_CHAR (TO_DATE (req_startdate, 'yyyy-mm-dd'), 'yyyymmdd')
+                    rdate,
+                 CASE holiday.req_type
+                    WHEN '1' THEN '出差'
+                    WHEN '2' THEN '请假'
+                 END
+                    rtype,
+                 req_remark rept,
+                 CASE holiday.req_status
+                    WHEN '0' THEN '未审批'
+                    WHEN '1' THEN '审批通过'
+                    WHEN '2' THEN '拒绝'
+                 END
+                    rstatus,
+                 holiday.req_status stscode
+            FROM B_M_EXM_SPV_HOLIDAY holiday
+           WHERE req_user = '%s') info
+ORDER BY info.rdate DESC
