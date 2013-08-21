@@ -64,7 +64,7 @@ public class DaoRecordUtil {
         return  s.getList(Record.class);
     }
 
-    public static List getRecords(Dao dao, String sql,Class t,int page,int size) {
+    public static List getRecords(Dao dao, String sql,Class t,int page,int size) {        
         Sql s = Sqls.create(sql);
         s.setCallback(Sqls.callback.entities());
         s.setPager(dao.createPager(page, size));

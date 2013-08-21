@@ -14,7 +14,6 @@ Ext.define('ccb.exam.view.changepass', {
     layout: 'fit',
     initComponent: function() {
         Ext.QuickTips.init();
-        console.log(comm.MyVtype.fieldEq());
         Ext.apply(Ext.form.VTypes, comm.MyVtype.chkPwd());
         this.items = [{
                 xtype: 'form',

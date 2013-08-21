@@ -8,7 +8,9 @@ import com.ccb.dl.ccbexam.bean.CcbExamUserSessionBean;
 import com.ccb.dl.ccbexam.bean.RetBean;
 import com.ccb.dl.ccbexam.util.DaoRecordUtil;
 import com.ccb.dl.ccbexam.util.PubUtil;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.nutz.log.Log;
 import org.nutz.dao.Dao;
 import org.nutz.dao.entity.Record;
@@ -68,7 +70,7 @@ public class ExamUserModule {
             log.debug("epass:" + epass + " dpass:" + rd.getString("passwd"));
             if (epass.compareTo(rd.getString("passwd")) != 0) {
                 log.info("密码不正确:" + userId);
-                return PubUtil.GenRetBean("0005", "用户ID输入错误", "");
+                return PubUtil.GenRetBean("0006", "密码不正确", "");
             } else {
                 try {
                     String sql = fsm.get("getRoleFuncInfo");
@@ -147,5 +149,28 @@ public class ExamUserModule {
 
 
         }
+    }
+    
+    @At("/exam/reportUtil")
+    @Ok("json")
+    @Fail("json")    
+    public Object getUserReport(@Param("page") int page,@Param("limit") int limit){
+        String sql = "";
+        sql = fsm.get("getUserReport");
+        log.debug("page :"+page+";limit:"+limit);
+        Record rd = (Record) usb.getVal("userInfo");
+        if( rd == null ){
+            return null;
+        }
+        sql = String.format(sql, rd.getString("userid"),rd.getString("userid"));
+        Integer total = (Integer) usb.getVal("totalCount");
+        if( total == null){
+            total = DaoRecordUtil.getSqlSize(dao, sql);
+            usb.setVal("totalCount", total);
+        }
+       
+        List<Record> list = DaoRecordUtil.getRecords(dao, sql, page, limit);
+        return PubUtil.GenSuccess(list, total);
+        //return list;
     }
 }

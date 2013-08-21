@@ -26,8 +26,9 @@ UPDATE b_m_exm_login_info login
  WHERE LOGIN.USER_ID = '%s'
 /**查找一个领导人的工作日志**/
 /*getUserReport*/
-SELECT *
-    FROM (SELECT rptdate rdate,
+ SELECT *
+    FROM (SELECT id id,
+                 rptdate rdate,
                  rpttype rtype,
                  rptconx rept,
                  CASE FLOW.RPTSTATUS
@@ -40,7 +41,8 @@ SELECT *
             FROM B_M_EXM_RPT_FLOW flow
            WHERE user_id = '%s'
           UNION ALL
-          SELECT TO_CHAR (TO_DATE (req_startdate, 'yyyy-mm-dd'), 'yyyymmdd')
+          SELECT sysid id,
+                 TO_CHAR (TO_DATE (req_startdate, 'yyyy-mm-dd'), 'yyyymmdd')
                     rdate,
                  CASE holiday.req_type
                     WHEN '1' THEN '出差'

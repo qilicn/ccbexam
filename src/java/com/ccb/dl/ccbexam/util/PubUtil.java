@@ -48,7 +48,8 @@ public class PubUtil {
         RetBean rt = new RetBean();
         rt.setRetCode("0000");
         rt.setSuccess(true);
-        rt.setRetMsg("方法调用成功");        
+        rt.setRetMsg("方法调用成功");    
+        rt.setTotal(0);
         return rt;
     }
 
@@ -61,11 +62,23 @@ public class PubUtil {
         return rt;
     }
 
+    public static RetBean GenSuccess(Object RetVal,int total) {
+        RetBean rt = new RetBean();
+        rt.setRetCode("0000");
+        rt.setSuccess(true);
+        rt.setRetMsg("方法调用成功");
+        rt.setRetVal(RetVal);
+        rt.setTotal(total);
+        return rt;
+    }    
+    
+    
     public static RetBean GenFailed(String retCode, String retMsg) {
         RetBean rt = new RetBean();
         rt.setRetCode(retCode);
         rt.setRetMsg(retMsg);
         rt.setSuccess(false);
+        rt.setTotal(0);
         return rt;
     }
 
@@ -75,6 +88,8 @@ public class PubUtil {
         rt.setRetMsg(retMsg);
         rt.setErrMsg(errMsg);
         rt.setSuccess(false);
+        rt.setTotal(0);
         return rt;
     }
+    
 }

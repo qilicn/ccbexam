@@ -28,19 +28,19 @@ module : 开始菜单图标类
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/changepass24.png', sizingMethod='scale'); 
 }
 
-.testapp-shortcut{
-    background-image:url(../images/test48.png)
+.workReport-shortcut{
+    background-image:url(../images/workReport48.png)
 }
-.testapp{
-    background-image:url(../images/test24.png);  
+.workReport{
+    background-image:url(../images/workReport24.png);  
 }
-.x-ie6 .testapp-shortcut{
+.x-ie6 .workReport-shortcut{
     background-image: none;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale');    
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/workReport48.png', sizingMethod='scale');    
 }
-.x-ie6 .testapp{
+.x-ie6 .workReport{
     background-image: none;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/workReport24.png', sizingMethod='scale'); 
  
 }
 .testapp_1-shortcut{
@@ -58,13 +58,6 @@ module : 开始菜单图标类
     filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/test48.png', sizingMethod='scale'); 
  
 }
-.loginMsgNormal{
-    text-align: center;
-    font-weight: normal;
-    color: black;
-}
-.loginMsgError{
-    text-align: center;
-    font-weight: bold;
-    color: red;
+.icon-add{
+    background-image:url(../images/add_1.png) !important;  
 }
