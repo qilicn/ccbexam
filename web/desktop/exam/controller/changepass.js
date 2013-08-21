@@ -5,7 +5,7 @@
 //用户更换密码功能
 Ext.define('ccb.exam.controller.changepass', {
     extend: 'Ext.app.Controller',
-    views: ['changepass'],
+    views: ['changepass', 'testapp_2'],
     msg: null,
     init: function() {
         this.control({
@@ -14,6 +14,9 @@ Ext.define('ccb.exam.controller.changepass', {
             },
             'changepass button[action=close]': {
                 click: this.close
+            },
+            'changepass button[action=test]': {
+                click: this.test
             }
         });
     },
@@ -39,7 +42,7 @@ Ext.define('ccb.exam.controller.changepass', {
             params: {userId: sessInfo.userid},
             waitMsg: '提交中，请稍后....',
             success: function(form, action) {
-                comm.pubUtil.sessTimeOut('密码更新成功','您已成功更新密码，现在将退出系统使用新密码登录');
+                comm.pubUtil.sessTimeOut('密码更新成功', '您已成功更新密码，现在将退出系统使用新密码登录');
             },
             failure: function(form, action) {
                 var result = action.result;
@@ -57,6 +60,11 @@ Ext.define('ccb.exam.controller.changepass', {
         ]);
         bform.clearInvalid();
         return;
+    },
+    test: function(button) {
+        var view = Ext.widget('testapp_2');
+        console.log(view);
+        view.show();
     }
 });
 
