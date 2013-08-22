@@ -7,8 +7,8 @@ Ext.define('ccb.exam.store.reptStore', {
     extend: 'Ext.data.Store',
     model: 'ccb.exam.model.reportInfo',
     id: 'reptStore',
-    buffered: true,
-    leadingBufferZone: 300,
+//    buffered: true,
+//    leadingBufferZone: 300,
     pageSize: 50,
     proxy: {
         type: 'ajax',

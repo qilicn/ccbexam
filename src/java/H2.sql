@@ -59,7 +59,7 @@ UPDATE b_m_exm_login_info login
                  holiday.req_status stscode
             FROM B_M_EXM_SPV_HOLIDAY holiday
            WHERE req_user = '%s') info
-ORDER BY info.rdate DESC
+ORDER BY info.id info.rdate DESC
 /**取可补录的日期**/
 /*getCanReportDate*/
 SELECT workdate

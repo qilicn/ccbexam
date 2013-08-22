@@ -44,7 +44,9 @@ Ext.define('ccb.exam.controller.workReport', {
                 var rtype = bform.findField('rtype');
                 rtype.reset();
                
-                var grid  = Ext.getCmp('workrpt');                
+                var grid  = Ext.getCmp('workrpt');
+                console.log(grid);
+                grid.store.reload();
             },
             failure: function(form, action) {
                 var result = action.result;
