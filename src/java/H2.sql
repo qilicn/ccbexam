@@ -60,3 +60,16 @@ UPDATE b_m_exm_login_info login
             FROM B_M_EXM_SPV_HOLIDAY holiday
            WHERE req_user = '%s') info
 ORDER BY info.rdate DESC
+/**取可补录的日期**/
+/*getCanReportDate*/
+SELECT *
+  FROM (SELECT T.*, ROWNUM RN
+          FROM (  SELECT *
+                    FROM B_M_EXM_WORK_CAL cal
+                   WHERE     CAL.WORKDATE <= (SELECT PARAM.WORKVALUE
+                                                FROM B_M_EXM_WORKPARAM param
+                                               WHERE PARAM.WORKKEY = 'curdate')
+                         AND CAL.DATEFLAG = '0'
+                ORDER BY CAL.WORKDATE DESC) T
+         WHERE ROWNUM <= %d)
+ WHERE RN >= 0

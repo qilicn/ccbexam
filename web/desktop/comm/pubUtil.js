@@ -136,6 +136,9 @@ Ext.define('comm.pubUtil', {
             var bform = form.getForm();
             return bform;
         },
+        //基层调研模板
+        researchTemp : '与***（客户单位、职务及姓名）商谈***（主要业务内容）业务合作事宜',
+        //参加会议模板：
         baseUrl: 'http://localhost:8084/ccbexam',
         wwidth: 800,
         wheight: 600,
@@ -143,7 +146,9 @@ Ext.define('comm.pubUtil', {
         sheight: 525,
         radio: 1,
         basepkg: 'ccb.exam.app',
-        defaultwp: 'wallpapers/desktop2.jpg'
+        defaultwp: 'wallpapers/desktop2.jpg',
+        //可补录的天数
+        reportDays : 7
     }
 });
 
