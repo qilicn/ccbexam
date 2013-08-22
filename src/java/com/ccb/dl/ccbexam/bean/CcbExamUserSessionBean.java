@@ -31,4 +31,8 @@ public class CcbExamUserSessionBean {
     public boolean contains( String id){
         return map.containsKey(id);
     }
+    
+    public void removeVal( String id ){
+        map.remove(id);
+    }
 }

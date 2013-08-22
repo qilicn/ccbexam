@@ -6,6 +6,7 @@ package com.ccb.dl.ccbexam.module;
 
 import com.ccb.dl.ccbexam.bean.CcbExamUserSessionBean;
 import com.ccb.dl.ccbexam.bean.RetBean;
+import com.ccb.dl.ccbexam.dao.BmexmRptFlow;
 import com.ccb.dl.ccbexam.util.DaoRecordUtil;
 import com.ccb.dl.ccbexam.util.PubUtil;
 import java.util.HashMap;
@@ -39,6 +40,13 @@ public class ExamUserModule {
     private FileSqlManager fsm;
     @Inject
     private CcbExamUserSessionBean usb;
+
+    private long getSerialId(String seqName) {
+        String sql = "select %s.nextval serial from dual ";
+        sql = String.format(sql, seqName);
+        Record rd = DaoRecordUtil.getRecord(dao, sql);
+        return rd.getInt("serial");
+    }
 
     @At("/exam/getUserInfo")
     @Ok("json")
@@ -86,7 +94,7 @@ public class ExamUserModule {
                     usb.setVal("userInfo", rd);
                     return PubUtil.GenSuccess(rd);
                 } else {
-                    return PubUtil.GenRetBean("0003", "该用户未分配功能，不能登录","");
+                    return PubUtil.GenRetBean("0003", "该用户未分配功能，不能登录", "");
                 }
             }
         }
@@ -150,27 +158,71 @@ public class ExamUserModule {
 
         }
     }
-    
+
+    /**
+     * 提取某一领导人的工作事项
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
     @At("/exam/reportUtil")
     @Ok("json")
-    @Fail("json")    
-    public Object getUserReport(@Param("page") int page,@Param("limit") int limit){
+    @Fail("json")
+    public RetBean getUserReport(@Param("page") int page, @Param("limit") int limit) {
         String sql = "";
         sql = fsm.get("getUserReport");
-        log.debug("page :"+page+";limit:"+limit);
+        log.debug("page :" + page + ";limit:" + limit);
         Record rd = (Record) usb.getVal("userInfo");
-        if( rd == null ){
+        if (rd == null) {
             return null;
         }
-        sql = String.format(sql, rd.getString("userid"),rd.getString("userid"));
+        sql = String.format(sql, rd.getString("userid"), rd.getString("userid"));
         Integer total = (Integer) usb.getVal("totalCount");
-        if( total == null){
+        if (total == null) {
             total = DaoRecordUtil.getSqlSize(dao, sql);
             usb.setVal("totalCount", total);
         }
-       
+
         List<Record> list = DaoRecordUtil.getRecords(dao, sql, page, limit);
         return PubUtil.GenSuccess(list, total);
         //return list;
+    }
+
+    @At("exam/getWorkDate")
+    @Ok("json")
+    @Fail("json")
+    public RetBean getWorkDate(@Param("range") int range) {
+        String sql = "";
+        sql = fsm.get("getCanReportDate");
+        sql = String.format(sql, range);
+        log.debug(sql);
+        List<Record> list = DaoRecordUtil.getRecords(dao, sql);
+        return PubUtil.GenSuccess(list, list.size());
+    }
+
+    /**
+     * 创建一条工作汇报
+     */
+    @At("exam/crtrpt")
+    @Ok("json")
+    @Fail("json")
+    public RetBean createReport(@Param("..") BmexmRptFlow flow) {
+        Record rd = (Record) usb.getVal("userInfo");
+        if (rd == null) {
+            return PubUtil.GenFailed("0009", "用户已过期");
+        }
+        String userId = rd.getString("userid");
+
+        try {
+            long id = this.getSerialId("B_M_EXM_FLOW_SEQ");
+            flow.setRptstatus("0");
+            flow.setUserid(userId);
+            dao.insert(flow);
+        } catch (Exception e) {
+            return PubUtil.GenFailed("0009", "数据库操作失败", e.getMessage());
+        }
+        usb.removeVal("totalCount");
+        return PubUtil.GenSuccessOnly();
     }
 }

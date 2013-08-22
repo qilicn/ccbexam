@@ -22,7 +22,7 @@ Ext.define('ccb.exam.controller.changepass', {
     },
     //获取指定form的basic类
     change: function(button) {
-        var bform = this.getBform(button);
+        var bform = comm.pubUtil.getBform(button);
         if (bform.hasInvalidField() === true) {
             Ext.MessageBox.alert('有非法的输入项，请检查后提交');
             return;

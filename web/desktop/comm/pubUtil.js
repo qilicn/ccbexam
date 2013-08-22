@@ -50,25 +50,11 @@ Ext.define('comm.pubUtil', {
             console.log("hello");
         },
         //设置窗口属性
-        extWinCfg: function(appInfo, fitScreen) {
-            var lmodel = this.loadLocInfo();
+        extWinCfg: function(appInfo, cfg) {
             var obj = new Object();
-            if (fitScreen) {
-                var st = lmodel.get('screenType');
-                //检查屏幕类型是否合法，不合法默认窄屏类型
-                switch (st) {
-                    case 'w':
-                        //定义宽屏窗口大小
-                        obj.width = comm.pubUtil.wwidth * comm.pubUtil.radio;
-                        obj.height = comm.pubUtil.wheight * comm.pubUtil.radio;
-                        break;
-                    default :
-                        //默认情况定义窄屏的高宽
-                        obj.width = comm.pubUtil.swidth * comm.pubUtil.radio;
-                        obj.height = comm.pubUtil.sheight * comm.pubUtil.radio;
-                        break;
-                }
-
+            if( cfg.fitScreen ){
+                obj.width = cfg.width;
+                obj.height =  cfg.height;       
             }
             //定义窗口ID
             obj.id = appInfo.module;
@@ -76,7 +62,6 @@ Ext.define('comm.pubUtil', {
             obj.title = appInfo.name;
             //定义窗口图标
             obj.iconCls = appInfo.module;
-
             return obj;
         },
         //用户session异常后返回
@@ -136,19 +121,23 @@ Ext.define('comm.pubUtil', {
             var bform = form.getForm();
             return bform;
         },
-        //基层调研模板
-        researchTemp : '与***（客户单位、职务及姓名）商谈***（主要业务内容）业务合作事宜',
+        //客户走访模板
+        custTemp: '与***（客户单位、职务及姓名）商谈***（主要业务内容）业务合作事宜',
+        //基础调研模板
+        researchTemp : '到***（地点）就***（调研内容）进行调研；',                
         //参加会议模板：
+        meetingTemp : '主持召开/参加***（会议或培训的名称）会议/培训，研究/学习***（主要内容）；',
         baseUrl: 'http://localhost:8084/ccbexam',
         wwidth: 800,
         wheight: 600,
         swidth: 700,
         sheight: 525,
-        radio: 1,
+        radio: 0.8,
         basepkg: 'ccb.exam.app',
         defaultwp: 'wallpapers/desktop2.jpg',
         //可补录的天数
-        reportDays : 7
+        range: 7,
+        workType:['部门工作','客户走访','基层调研','参加会议']
     }
 });
 

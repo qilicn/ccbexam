@@ -62,9 +62,9 @@ UPDATE b_m_exm_login_info login
 ORDER BY info.rdate DESC
 /**取可补录的日期**/
 /*getCanReportDate*/
-SELECT *
+SELECT workdate
   FROM (SELECT T.*, ROWNUM RN
-          FROM (  SELECT *
+          FROM (  SELECT cal.workdate
                     FROM B_M_EXM_WORK_CAL cal
                    WHERE     CAL.WORKDATE <= (SELECT PARAM.WORKVALUE
                                                 FROM B_M_EXM_WORKPARAM param

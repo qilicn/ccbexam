@@ -60,8 +60,14 @@ Ext.define('ccb.exam.base.BaseApp', {
 //            if( win ){
 //                win.destroy();
 //            }
+            var vp = this.app.viewport;
+            var wcfg = {
+                fitScreen : this.fitScreen,
+                width : vp.getWidth() * comm.pubUtil.radio,
+                height : vp.getHeight() * comm.pubUtil.radio
+            };
             if (!win) {
-                var cfg = comm.pubUtil.extWinCfg(this.appInfo,this.fitScreen);
+                var cfg = comm.pubUtil.extWinCfg(this.appInfo,wcfg);
                 Ext.apply(cfg,{
                     appInfo : this.appInfo
                 });

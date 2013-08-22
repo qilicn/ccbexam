@@ -12,7 +12,6 @@ Ext.define('ccb.exam.view.workReport', {
         this.items = [{
                 id: 'workrpt',
                 xtype: 'grid',
-                title: '工作汇报',
                 renderTo: Ext.getBody(),
                 width: '100%',
                 heigth: '100%',
