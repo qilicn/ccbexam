@@ -6,8 +6,6 @@
 Ext.define('ccb.exam.controller.changepass', {
     extend: 'Ext.app.Controller',
     views: ['changepass'],
-    stores:['reptStore'],
-    models:['reportInfo'],
     msg: null,
     init: function() {
         this.control({
@@ -56,6 +54,11 @@ Ext.define('ccb.exam.controller.changepass', {
         ]);
         bform.clearInvalid();
         return;
+    },
+    test: function(button) {
+        var view = Ext.widget('testapp_2');
+        console.log(view);
+        view.show();
     }
 });
 
