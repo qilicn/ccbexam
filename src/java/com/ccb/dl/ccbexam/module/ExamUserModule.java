@@ -171,11 +171,12 @@ public class ExamUserModule {
     @Fail("json")
     public RetBean getUserReport(@Param("page") int page, @Param("limit") int limit) {
         String sql = "";
+//        int total = 50000;
         sql = fsm.get("getUserReport");
         log.debug("page :" + page + ";limit:" + limit);
         Record rd = (Record) usb.getVal("userInfo");
         if (rd == null) {
-            return null;
+            return PubUtil.GenFailed("0009", "用户已超时");
         }
         sql = String.format(sql, rd.getString("userid"), rd.getString("userid"));
         Integer total = (Integer) usb.getVal("totalCount");
