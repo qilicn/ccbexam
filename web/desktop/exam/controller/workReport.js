@@ -7,21 +7,70 @@ Ext.define('ccb.exam.controller.workReport', {
     require: ['Ext.data.Store'],
     views: [
         'workReport',
-        'report'
+        'report',
+        'report_1'
     ],
     msg: null,
     init: function() {
         this.control({
+            //添加工作事项
             'workReport button[id=addReprt]': {
                 click: this.addReport
             },
+            //根据工作事项类型更改内容模板
             'report combo[id=rtype]': {
                 change: this.recvChange
             },
+            //创建工作事项
             'report button[id=submit]': {
                 click: this.createRept
+            },
+            //修改或删除工作事项
+            'workReport grid[id=workrpt]': {
+                itemdblclick: this.editReport,
+                itemmouseenter: this.showEditable
+            },
+            //提交修改
+            'report_1 button[id=submit]': {
+                click: this.updateRept
+            },
+            //删除事项
+            'report_1 button[id=delete]': {
+                click: this.deleteRept
+            },
+            //关闭修改窗口
+            'report_1 button[id=cancel]': {
+                click: this.cancelEdit
             }
         });
+    },
+    cancelEdit: function(button) {
+        var win = button.up('window');
+        win.close();
+    },
+    deleteRept: function(button) {
+    },
+    updateRept: function(button) {
+
+    },
+    showEditable: function(grid, record, item, index, e, eOpts) {
+        Ext.QuickTips.init();
+        var str='双击未审批的工作汇报可进行编辑或删除'
+        Ext.create('Ext.tip.ToolTip', {
+            target: item.id,
+            html: str,
+            dismissDelay: 3000
+        });
+    },
+    editReport: function(grid, record) {
+        var stscode = record.get('stscode');
+        //如果审批结果不为'0'(未审批），不能修改或删除
+        if (stscode !== '0')
+            return;
+        var win = Ext.widget('report_1');
+        var form = win.down('form');
+        form.loadRecord(record);
+        win.show();
     },
     //创建一条工作汇报
     createRept: function(button) {

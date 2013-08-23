@@ -16,9 +16,6 @@ Ext.define('ccb.exam.controller.changepass', {
             },
             'changepass button[action=close]': {
                 click: this.close
-            },
-            'changepass button[action=test]': {
-                click: this.test
             }
         });
     },
