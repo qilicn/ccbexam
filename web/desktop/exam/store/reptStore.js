@@ -7,15 +7,17 @@ Ext.define('ccb.exam.store.reptStore', {
     extend: 'Ext.data.Store',
     model: 'ccb.exam.model.reportInfo',
     id: 'reptStore',
-    buffered: true,
+//    buffered: true,
     leadingBufferZone: 300,
+    trailingBufferZone:100,
     pageSize: 50,
     proxy: {
         type: 'ajax',
         url: comm.pubUtil.baseUrl + '/exam/reportUtil.nutz',
         api: {
             create: comm.pubUtil.baseUrl + '/exam/crtrpt.nutz',
-            update: comm.pubUtil.baseUrl + '/exam/updateReport.nutz'
+            update: comm.pubUtil.baseUrl + '/exam/updrpt.nutz',
+            destroy:comm.pubUtil.baseUrl+'/exam/delrpt.nutz'
         },
         reader: {
             root: 'retVal',

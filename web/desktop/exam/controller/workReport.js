@@ -21,6 +21,9 @@ Ext.define('ccb.exam.controller.workReport', {
             'report combo[id=rtype]': {
                 change: this.recvChange
             },
+            'report_1 combo[id=rtype]': {
+                change: this.recvChange
+            },
             //创建工作事项
             'report button[id=submit]': {
                 click: this.createRept
@@ -49,17 +52,33 @@ Ext.define('ccb.exam.controller.workReport', {
         win.close();
     },
     deleteRept: function(button) {
+        var win = button.up('window');
+        var bform = comm.pubUtil.getBform(button);
+
+        Ext.Msg.confirm('删除记录', '该记录将被删除，本操作不能恢复，确认删除吗？', function(answer) {
+            if (answer === 'no') {
+                win.close();
+            } else {
+                var grid = Ext.getCmp('workrpt');
+                grid.store.remove(bform.getRecord());
+                grid.store.reload();
+                win.close();
+            }
+
+        });
     },
     updateRept: function(button) {
 
     },
     showEditable: function(grid, record, item, index, e, eOpts) {
+        var stscode = record.get('stscode');
+        if (stscode !== '0')
+            return;
         Ext.QuickTips.init();
-        var str='双击未审批的工作汇报可进行编辑或删除'
+        var str = '双击<font color=red>未审批</font>的工作汇报可进行编辑或删除'
         Ext.create('Ext.tip.ToolTip', {
             target: item.id,
-            html: str,
-            dismissDelay: 3000
+            html: str
         });
     },
     editReport: function(grid, record) {
@@ -77,37 +96,32 @@ Ext.define('ccb.exam.controller.workReport', {
         Ext.QuickTips.init();
         var bform = comm.pubUtil.getBform(button);
         var param = bform.getValues();
-//        var model = Ext.create('ccb.exam.model.reportInfo',param);
-//        var grid = Ext.getCmp('workrpt');
-//        var store = grid.getStore();
-//        store.add(model);
-//        store.reload();
 
-        bform.submit({
-            url: comm.pubUtil.baseUrl + '/exam/crtrpt.nutz',
-            mothod: 'GET',
-            params: param,
-            waitMsg: '提交中，请稍后....',
-            success: function(form, action) {
-                Ext.create('Ext.tip.ToolTip', {
-                    target: 'report',
-                    html: '该汇报已保存，请创建其他类型报告或关闭',
-                    dismissDelay: 3000
-                });
-                var rdate = bform.findField('rdate');
-                rdate.reset();
-                var rtype = bform.findField('rtype');
-                rtype.reset();
-
-                var grid = Ext.getCmp('workrpt');
-                grid.store.loadPage(1);
-            },
-            failure: function(form, action) {
-                var result = action.result;
-                comm.pubUtil.storeErrLog(result);
-                comm.pubUtil.sessTimeOut('用户超时', '您的空闲时间超过系统允许范围，请重新登录');
-            }
-        });
+        var model = Ext.create('ccb.exam.model.reportInfo', param);
+        var grid = Ext.getCmp('workrpt');
+        grid.store.add(model);
+        grid.store.reload();
+//        bform.submit({
+//            url: comm.pubUtil.baseUrl + '/exam/crtrpt.nutz',
+//            mothod: 'GET',
+//            params: param,
+//            waitMsg: '提交中，请稍后....',
+//            success: function(form, action) {
+//                Ext.Msg.alert("该汇报已保存，请创建其他类型报告或关闭窗口");
+//                var rdate = bform.findField('rdate');
+//                rdate.reset();
+//                var rtype = bform.findField('rtype');
+//                rtype.reset();
+//
+//                var grid = Ext.getCmp('workrpt');
+//                grid.store.reload();
+//            },
+//            failure: function(form, action) {
+//                var result = action.result;
+//                comm.pubUtil.storeErrLog(result);
+//                comm.pubUtil.sessTimeOut('用户超时', '您的空闲时间超过系统允许范围，请重新登录');
+//            }
+//        });
     },
     //根据工作类型的不同，选择对应的模板
     recvChange: function(combo, newValue, oldValue) {

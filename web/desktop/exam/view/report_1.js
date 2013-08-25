@@ -9,7 +9,7 @@ Ext.define('ccb.exam.view.report_1', {
     width: 400,
     height: 300,
     layout: 'fit',
-    title : '工作汇报事项维护',
+    title: '工作汇报事项维护',
     modal: true,
     initComponent: function() {
         Ext.QuickTips.init();
@@ -19,18 +19,25 @@ Ext.define('ccb.exam.view.report_1', {
                 id: 'report_1',
                 defaults: {
                     msgTarget: 'under'
-                },                
+                },
                 items: [{
+                        xtype : 'textfield',
+                        fieldLabel : '事项序号',
+                        id : 'id',
+                        name : 'id',
+                        readOnly : true
+                    },
+                    {
                         xtype: 'combo',
-                        id : 'rdate',
-                        name : 'rdate',
+                        id: 'rdate',
+                        name: 'rdate',
                         fieldLabel: '汇报日期',
                         listConfig: {
                             loadingText: '加载可用的汇报期，请稍后....',
                             emptyText: '未找到可用的汇报期',
                             maxheight: 200
                         },
-                        minWidth : 100,
+                        minWidth: 100,
                         valueField: 'workdate',
                         displayField: 'workdate',
                         //forceSelection : true,
@@ -39,17 +46,17 @@ Ext.define('ccb.exam.view.report_1', {
                     },
                     {
                         xtype: 'combo',
-                        id : 'rtype',
-                        name : 'rtype',
+                        id: 'rtype',
+                        name: 'rtype',
                         fieldLabel: '汇报类型',
-                        minWidth : 100,
-                        store : comm.pubUtil.workType,
+                        minWidth: 100,
+                        store: comm.pubUtil.workType,
                         //value : '部门工作',
-                        forceSelection : true
-                    },{
-                        xtype:'textareafield',
-                        id : 'rept',
-                        name : 'rept',
+                        forceSelection: true
+                    }, {
+                        xtype: 'textareafield',
+                        id: 'rept',
+                        name: 'rept',
                         fieldLabel: '工作内容',
                         anchor: '90%',
                         //selectOnFocus : true,
@@ -59,17 +66,17 @@ Ext.define('ccb.exam.view.report_1', {
         this.buttons = [
             {
                 text: '修改',
-                id :'submit',
+                id: 'submit',
                 action: 'submit'
             },
             {
                 text: '删除',
-                id : 'delete',
+                id: 'delete',
                 action: 'delete'
-            },{
+            }, {
                 text: '取消',
-                id : 'cancel',
-                action: 'cancel'                
+                id: 'cancel',
+                action: 'cancel'
             }
         ];
         this.callParent(arguments);
